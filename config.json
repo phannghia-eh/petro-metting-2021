@@ -1,0 +1,7 @@
+{
+  "default_connect_string": "mongodb://localhost:27018/debt",
+  "allow_origin_host": "*",
+  "enable_morgan": true,
+  "listen_interface": "localhost",
+  "listen_port": 3001
+}
