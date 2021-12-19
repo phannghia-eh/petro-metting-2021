@@ -13,7 +13,7 @@ let app = express()
 
 if (global.config.use_database) {
     require('./lib/database/mongodb').openDatabase(global.config.default_connect_string, () => {
-        require('./seeding.database')
+        console.log('DB connected')
     })
 }
 if (global.config.enable_morgan) {
