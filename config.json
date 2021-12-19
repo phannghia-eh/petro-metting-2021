@@ -1,7 +1,8 @@
 {
-  "default_connect_string": "mongodb://localhost:27018/debt",
+  "default_connect_string": "mongodb+srv://hoinghinguoilaodong2021:l41nMUVfIILTFOm8ayTx@cluster0.ewmcb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   "allow_origin_host": "*",
   "enable_morgan": true,
-  "listen_interface": "localhost",
+  "listen_interface": "0.0.0.0",
+  "use_database": true,
   "listen_port": 3001
 }
