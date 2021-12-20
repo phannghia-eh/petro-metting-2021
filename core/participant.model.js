@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const crypto = require('crypto')
 
 const ParticipantSchema = new mongoose.Schema({
     name: {
@@ -22,11 +23,18 @@ const ParticipantSchema = new mongoose.Schema({
     phone: {
         type: String,
         default: ''
+    },
+    passcode: {
+        type: String,
+        default: randomValueHex(6),
+        unique: true
     }
 }, {timestamps: true, minimize: false})
 
-ParticipantSchema.statics.createParticipant = function (data) {
-    return new this(data).save()
+function randomValueHex (len) {
+    return crypto.randomBytes(Math.ceil(len/2))
+        .toString('hex') // convert to hexadecimal format
+        .slice(0,len).toUpperCase();   // return required number of characters
 }
 
 const ParticipantModel = mongoose.model('participant', ParticipantSchema)

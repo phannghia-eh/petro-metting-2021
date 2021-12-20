@@ -1,4 +1,5 @@
 const mailer = require('../lib/nodemailer')
+const ParticipantService = require('../core/participant.service')
 
 class ApiController {
     static async get(req, res, next) {
@@ -17,13 +18,19 @@ class ApiController {
             'abc3@gmail.com',
         ]
 
-        if (whitelist_mails.includes(email)) {
-            result = await mailer.sendSuccessMail(req.body)
-        } else {
-            result = await mailer.sendFailMail(req.body)
-        }
+        try {
+            result = await ParticipantService.create(req.body)
 
-        res.status(200).json(result)
+            if (whitelist_mails.includes(email)) {
+                result = await mailer.sendSuccessMail(result)
+            } else {
+                result = await mailer.sendFailMail(result)
+            }
+
+            res.status(200).json(result)
+        } catch (e) {
+            res.status(501).json(e)
+        }
     }
 }
 
