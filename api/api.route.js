@@ -6,6 +6,6 @@ router.route('/')
     .post(ApiController.register)
 
 router.route('/excel')
-    .get(ApiController.exportExcel)
+    .post(ApiController.exportExcel)
 
 module.exports = router

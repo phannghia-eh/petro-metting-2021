@@ -6,6 +6,7 @@
   "use_database": true,
   "listen_port": 3001,
   "meeting_url": "http://fb.com/phan.nghia",
+  "code": "fas89fta",
   "whitelist_emails": [
     "abc@gmail.com",
     "abc1@gmail.com",
