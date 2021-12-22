@@ -4,5 +4,15 @@
   "enable_morgan": true,
   "listen_interface": "0.0.0.0",
   "use_database": true,
-  "listen_port": 3001
+  "listen_port": 3001,
+  "meeting_url": "http://fb.com/phan.nghia",
+  "whitelist_emails": [
+    "abc@gmail.com",
+    "abc1@gmail.com",
+    "abc3@2gmail.com",
+    "abc3@gmail.com",
+    "ab111a@gmail.com",
+    "phn1910@gmail.com",
+    "minhkhue.event@gmail.com"
+  ]
 }

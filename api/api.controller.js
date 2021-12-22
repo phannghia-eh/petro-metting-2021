@@ -11,12 +11,7 @@ class ApiController {
         let email = req.body.email
         console.log(req.body)
         let result = null
-        let whitelist_mails = [
-            'abc@gmail.com',
-            'abc1@gmail.com',
-            'abc3@2gmail.com',
-            'abc3@gmail.com',
-        ]
+        let whitelist_mails = global.config.whitelist_emails
 
         try {
             result = await ParticipantService.create(req.body)
@@ -27,8 +22,10 @@ class ApiController {
                 result = await mailer.sendFailMail(result)
             }
 
+
             res.status(200).json(result)
         } catch (e) {
+            console.log(e)
             res.status(501).json(e)
         }
     }
