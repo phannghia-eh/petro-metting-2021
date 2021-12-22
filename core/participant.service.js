@@ -10,6 +10,17 @@ class ParticipantService {
             })
         })
     }
+
+    static async getAll() {
+        return new Promise((resolve, reject) => {
+            Participant
+                .find({}, {__v: 0}, {lean: 1})
+                .exec((err, rls) => {
+                    if (err) return reject(err)
+                    return resolve(rls)
+                })
+        })
+    }
 }
 
 module.exports = ParticipantService
