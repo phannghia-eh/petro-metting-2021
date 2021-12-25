@@ -13,11 +13,13 @@ class ApiController {
         console.log(req.body)
         let result = null
         let whitelist_mails = global.config.whitelist_emails
-        result = await ParticipantService.create(req.body)
+
+        result = req.body
 
         try {
 
             if (whitelist_mails.includes(email)) {
+                result = await ParticipantService.create(req.body)
                 await mailer.sendSuccessMail(result)
             } else {
                 await mailer.sendFailMail(result)
