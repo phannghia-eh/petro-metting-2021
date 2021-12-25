@@ -20,7 +20,8 @@ class ApiController {
 
             if (whitelist_mails.includes(email)) {
                 result = await ParticipantService.create(req.body)
-                await mailer.sendSuccessMail(result)
+                let mail = await mailer.sendSuccessMail(result)
+                console.log('result sent mail:', mail)
 
                 return res.status(200).json(result)
             } else {
