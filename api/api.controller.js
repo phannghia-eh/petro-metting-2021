@@ -23,6 +23,7 @@ class ApiController {
                 await mailer.sendSuccessMail(result)
             } else {
                 await mailer.sendFailMail(result)
+                return res.status(501)
             }
 
 
