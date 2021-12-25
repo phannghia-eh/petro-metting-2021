@@ -1,6 +1,7 @@
 const mailer = require('../lib/nodemailer')
 const xl = require('exceljs')
 const ParticipantService = require('../core/participant.service')
+const fs = require('fs');
 
 class ApiController {
     static async get(req, res, next) {
@@ -16,13 +17,15 @@ class ApiController {
 
         result = req.body
 
+        var logFile = fs.createWriteStream('log.txt', { flags: 'a' });
+
+
         try {
 
             if (whitelist_mails.includes(email)) {
                 result = await ParticipantService.create(req.body)
                 let mail = await mailer.sendSuccessMail(result)
                 console.log('result sent mail:', mail)
-
                 return res.status(200).json(result)
             } else {
                 await mailer.sendFailMail(result)
