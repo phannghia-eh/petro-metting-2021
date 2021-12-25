@@ -21,13 +21,15 @@ class ApiController {
             if (whitelist_mails.includes(email)) {
                 result = await ParticipantService.create(req.body)
                 await mailer.sendSuccessMail(result)
+
+                return res.status(200).json(result)
             } else {
                 await mailer.sendFailMail(result)
-                return res.status(501)
+
+                return res.status(403).json({message: "Đăng ký thất bại"})
             }
 
-
-            res.status(200).json(result)
+            return res.status(403).json({message: "Đăng ký thất bại"})
         } catch (e) {
             console.log(e)
             res.status(501).json(e)
