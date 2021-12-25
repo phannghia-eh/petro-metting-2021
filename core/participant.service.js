@@ -3,7 +3,7 @@ const Participant = require('./participant.model')
 class ParticipantService {
     static async create(participant) {
         return new Promise((resolve, reject) => {
-            Participant.findOneAndUpdate(participant.email, participant, {upsert: true}, function (error, result) {
+            Participant.findOneAndUpdate({email: participant.email}, participant, {upsert: true}, function (error, result) {
                 if (!error) {
                     // If the document doesn't exist
                     if (!result) {
