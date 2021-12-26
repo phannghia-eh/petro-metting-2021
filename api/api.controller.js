@@ -25,8 +25,8 @@ class ApiController {
                 return res.status(200).json(result)
             } else {
                 result = req.body
-                await mailer.sendFailMail(result)
-
+                let mail = await mailer.sendFailMail(result)
+console.log(mail)
                 return res.status(403).json({message: "Đăng ký thất bại"})
             }
 
