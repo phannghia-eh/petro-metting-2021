@@ -32,6 +32,11 @@ const ParticipantSchema = new mongoose.Schema({
     }
 }, {timestamps: true, minimize: false})
 
+ParticipantSchema.pre('save', async function f(next) {
+    this.passcode = randomValueHex(16)
+    next()
+})
+
 function randomValueHex (len) {
     return  Math.random().toString(36).substring(2, len / 2 + 2).toUpperCase() + Math.random().toString(36).substring(2,  len / 2 + 2).toUpperCase()
     // return required number of characters
