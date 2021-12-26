@@ -26,7 +26,7 @@ const ParticipantSchema = new mongoose.Schema({
     },
     passcode: {
         type: String,
-        default: randomValueHex(6),
+        default: randomValueHex(8),
         unique: true
     }
 }, {timestamps: true, minimize: false})
