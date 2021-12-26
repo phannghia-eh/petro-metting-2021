@@ -12,6 +12,7 @@ class ApiController {
         // Do register account
         let email = req.body.email
         console.log(req.body)
+        global.logger.info(req.body)
         let result = null
         let whitelist_mails = global.config.whitelist_emails
 
@@ -19,22 +20,28 @@ class ApiController {
         try {
             if (whitelist_mails.includes(email)) {
                 console.log('WHITELIST')
+                global.logger.info('WHITELIST')
                 result = await ParticipantService.create(req.body)
                 console.log('CREATE model result', result)
+                global.logger.info('CREATE model result', result)
                 let mail = await mailer.sendSuccessMail(result)
                 console.log('result sent mail:', mail)
+                global.logger.info('result sent mail:', mail)
                 return res.status(200).json(result)
             } else {
                 console.log('BLACKLIST')
+                global.logger.info('BLACKLIST')
                 result = req.body
                 let mail = await mailer.sendFailMail(result)
                 console.log(mail)
+                global.logger.info(mail)
                 return res.status(403).json({message: "Đăng ký thất bại"})
             }
 
             return res.status(403).json({message: "Đăng ký thất bại"})
         } catch (e) {
             console.log(e)
+            global.logger.error(e)
             res.status(501).json(e)
         }
     }

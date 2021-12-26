@@ -7,6 +7,8 @@ try {
 const express = require('express')
 const bodyParser = require('body-parser')
 const multer = require('multer')
+const log4js = require("log4js");
+
 require('dotenv').config()
 
 let app = express()
@@ -34,3 +36,11 @@ require('./route')(app, http)
 let port = process.env.PORT || global.config.listen_port || 3333
 http.listen(port, global.config.listen_interface)
 console.log('App is listening at port ' + port)
+
+log4js.configure({
+    appenders: { cheese: { type: "file", filename: "cheese.log" } },
+    categories: { default: { appenders: ["cheese"], level: "info" } }
+});
+
+var logger = log4js.getLogger('cheese');
+global.logger = logger
