@@ -15,10 +15,6 @@ class ApiController {
         let result = null
         let whitelist_mails = global.config.whitelist_emails
 
-        result = req.body
-
-        var logFile = fs.createWriteStream('log.txt', { flags: 'a' });
-
 
         try {
 
@@ -28,6 +24,7 @@ class ApiController {
                 console.log('result sent mail:', mail)
                 return res.status(200).json(result)
             } else {
+                result = req.body
                 await mailer.sendFailMail(result)
 
                 return res.status(403).json({message: "Đăng ký thất bại"})
