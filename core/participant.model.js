@@ -32,9 +32,8 @@ const ParticipantSchema = new mongoose.Schema({
 }, {timestamps: true, minimize: false})
 
 function randomValueHex (len) {
-    return crypto.randomBytes(Math.ceil(len/2))
-        .toString('hex') // convert to hexadecimal format
-        .slice(0,len).toUpperCase();   // return required number of characters
+    return  Math.random().toString(36).substring(2, len / 2 + 2).toUpperCase() + Math.random().toString(36).substring(2,  len / 2 + 2).toUpperCase()
+    // return required number of characters
 }
 
 const ParticipantModel = mongoose.model('participant', ParticipantSchema)
