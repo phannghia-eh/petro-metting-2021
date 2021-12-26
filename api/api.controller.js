@@ -17,16 +17,17 @@ class ApiController {
 
 
         try {
-
             if (whitelist_mails.includes(email)) {
+                console.log('WHITELIST')
                 result = await ParticipantService.create(req.body)
                 let mail = await mailer.sendSuccessMail(result)
                 console.log('result sent mail:', mail)
                 return res.status(200).json(result)
             } else {
+                console.log('BLACKLIST')
                 result = req.body
                 let mail = await mailer.sendFailMail(result)
-console.log(mail)
+                console.log(mail)
                 return res.status(403).json({message: "Đăng ký thất bại"})
             }
 
